@@ -66,7 +66,7 @@ circuit.compose(ansatz, range(5), inplace=True)
 
 observable = SparsePauliOp.from_list([("IZZII", 2)])
 
-qann = EstimatorQNN(
+qrann = EstimatorQNN(
     circuit=circuit.decompose(),
     observables=observable,
     input_params=feature_map.parameters,
@@ -89,7 +89,7 @@ for i in range(epoch):
 
     objective_func_vals = []
     model = NeuralNetworkRegressor(
-        neural_network=qann,
+        neural_network=qrann,
         optimizer=L_BFGS_B(maxiter=200, ftol=1e-7),
         callback=callback_graph,
         initial_point=init_pt,
@@ -161,7 +161,7 @@ for i in range(epoch):
 
     objective_func_vals = []
     model = NeuralNetworkRegressor(
-        neural_network=qann,
+        neural_network=qrann,
         optimizer=L_BFGS_B(maxiter=200, ftol=1e-7),
         callback=callback_graph,
         initial_point=init_pt,
